@@ -168,7 +168,11 @@ def test_manga_details_modal():
     time.sleep(2)
     
     # Verify that the modal is closed and no longer visible
-    # assert "Manga Details" not in driver.page_source
+    # Ensure the user is on the manga search page
+    Manga_search2 = driver.find_element(By.CLASS_NAME, "text-4xl")
+    print(Manga_search2)
+    assert Manga_search2.text == "Manga You Should Read" 
+    time.sleep(2)
 
 # Run the tests
 test_login()
