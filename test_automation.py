@@ -52,13 +52,19 @@ def test_manga_search(driver):
     )
     assert manga_search.text == "Manga You Should Read"
     time.sleep(2)
+    # No errors should be found
+    # search_terms = ["Naruto", "One Piece", "No manga found"]
+
+    #Error found here with this input
     search_terms = ["Naruto", "One Piece", "Seven Deadly Sins", "No manga found"]
+
     
     for term in search_terms:
         # Search for the manga
         search_box = driver.find_element(By.CSS_SELECTOR, "#manga-search")
         search_box.clear()
         search_box.send_keys(term)
+        time.sleep(2)
         driver.find_element(By.CSS_SELECTOR, ".bg-green-500").click()
         time.sleep(2)
         # Verify that the appropriate manga card or message is displayed
@@ -110,7 +116,7 @@ def test_manga_details_modal(driver):
         manga_summary = driver.find_element(By.CSS_SELECTOR, "p.text-gray-600")
         summary_text = manga_summary.get_attribute("textContent")
         print(summary_text)
-        # assert summary_text == "Expected summary here"
+        assert summary_text == "A teenager gains the abilities of a Soul Reaper and must protect the living and the dead from evil spirits."
         time.sleep(2)
     except NoSuchElementException:
         print("Details link not found")
@@ -127,3 +133,6 @@ def test_manga_details_modal(driver):
     )
     assert manga_search2.text == "Manga You Should Read"
     time.sleep(2)
+
+
+# run pytest .\test_automation.py  
